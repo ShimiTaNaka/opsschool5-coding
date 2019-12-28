@@ -1,9 +1,9 @@
 from requests import get
+import os
 import sys
 
 BASE_URL = "http://api.weatherstack.com/current"
-ACCESS_KEY = "0c47a9b2d09ac64b1cdf0e14c5d43f6a"
-
+ACCESS_KEY = os.environ.get('WEATHER_KEY')  # set your key in environment vars
 
 def args_parser(args_to_parse):
     args_count = len(args_to_parse)
