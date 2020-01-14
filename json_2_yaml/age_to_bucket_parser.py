@@ -1,11 +1,14 @@
 import json
 import sys
+from collections import defaultdict
+import yaml
 
 LAST_INDEX = -1
 NEXT_AGE_BORDER = 1
 AGE = 1
 NAME = 0
 HW_JSON = 'hw.json'
+hw_output_dict = defaultdict(list)
 
 
 def yaml_my_json_group_sorted():
@@ -27,13 +30,14 @@ def yaml_my_json_group_sorted():
 
     current_people_list = people_list
     for age_border in range(len(sorted_ages_borders) - 1):
-        print(sorted_ages_borders[age_border], "-", sorted_ages_borders[age_border + NEXT_AGE_BORDER], ":", sep="")
+        ages_group_name = f"{sorted_ages_borders[age_border]}-{sorted_ages_borders[age_border + NEXT_AGE_BORDER]}"
         for person in current_people_list:
             if sorted_ages_borders[age_border] <= person[AGE] < sorted_ages_borders[age_border + NEXT_AGE_BORDER]:
-                print("  -", person[NAME])
+                hw_output_dict[ages_group_name].append(person[NAME])
             else:
                 current_people_list = people_list[people_list.index(person):]
                 break
+    print(yaml.dump(dict(hw_output_dict), allow_unicode=True))
 
 
 if __name__ == '__main__':
