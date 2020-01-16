@@ -41,8 +41,7 @@ def print_city_weather(cities, temperature, token):
                 msg = f"\nERROR: Site Api request failed"
                 print(msg)
                 exit(615)
-        current_city_temperature = json_out["current"]["temperature"]
-        print(f"The weather in {json_out['request']['query']} today {current_city_temperature} \
+        print(f"The weather in {json_out['request']['query']} today {json_out["current"]["temperature"]} \
 {temperature}")
 
 
