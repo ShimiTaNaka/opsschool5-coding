@@ -14,13 +14,10 @@ from requests import get
   )
 @click.option("--city", '-c', help="Cities names separated by ',' or ';'. "
               "A city name that contains more than an one word must be enclosed in brackets(\")", required=True)
-@click.option("--token", '-t', help="The weatherstack.com user API Token ", required=True)
-def cli(temperature_unit, city, token):
-#     cities = city.replace(';', ',').split(',')
+@click.option("--api_token", '-t', help="The weatherstack.com user API Token ", required=True)
+def cli(temperature_unit, city, api_token):
     for_supplied_cities = [not_empty_city_name for not_empty_city_name in city.replace(';', ',').split(',') if not_empty_city_name]
-    using_api_token = token
-    print_city_weather(for_supplied_cities, temperature_unit, using_api_token)
-
+    print_city_weather(for_supplied_cities, temperature_unit, api_token)
 
 def print_city_weather(cities, temperature_unit, token):
     temperature_unit_Acronyms = "m" if temperature_unit == 'Celsius' else "f"
@@ -40,9 +37,7 @@ def print_city_weather(cities, temperature_unit, token):
                 msg = f"\nERROR: Site Api request failed"
                 print(msg)
                 exit(615)
-        print(f"The weather in {json_out['request']['query']} today {json_out['current']['temperature']} \
-{temperature_unit}")
-
+        print(f"The weather in {json_out['request']['query']} today {json_out['current']['temperature']} {temperature_unit}")
 
 if __name__ == '__main__':
     cli()
