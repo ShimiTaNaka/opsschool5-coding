@@ -43,7 +43,7 @@ def print_city_weather(cities, temperature, token):
                 exit(615)
         current_city_temperature = json_out["current"]["temperature"]
         print(f"The weather in {json_out['request']['query']} today {current_city_temperature} \
-{'Fahrenheit' if temperature_unit == 'f' else 'Celsius'}")
+{temperature}")
 
 
 if __name__ == '__main__':
